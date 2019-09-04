@@ -1,11 +1,146 @@
 <?php
+set_time_limit(0);
+error_reporting(0);
+date_default_timezone_set('Asia/Jakarta');
 
-$i1i='========================================================================
-	Obfuscation provided by Unknowndevice64 - Free Online PHP Obfuscator
-				http://www.ud64.com/
-==============================================================================';
+require("config.php");
+
+/* START COLOR */
+$res     = "\033[0m";
+$hitam   = "\033[0;30m";
+$abu2    = "\033[1;30m";
+$putih   = "\033[0;37m";
+$putih2  = "\033[1;37m";
+$red     = "\033[0;31m";
+$red2    = "\033[1;31m";
+$green   = "\033[0;32m";
+$green2  = "\033[1;32m";
+$yellow  = "\033[0;33m";
+$yellow2 = "\033[1;33m";
+$blue    = "\033[0;34m";
+$blue2   = "\033[1;34m";
+$purple  = "\033[0;35m";
+$purple2 = "\033[1;35m";
+$lblue   = "\033[0;36m";
+$lblue2  = "\033[1;36m";
+/* END COLOR */
+
+$false   = "{$abu2}[{$red}x{$abu2}]{$red2}";
+$true    = "{$abu2}[{$green}+{$abu2}]{$green2}";
+$pentung = "{$abu2}[{$yellow}!{$abu2}]{$yellow2}";
+$titik   = "{$abu2}[{$res}•{$abu2}]{$green2}";
 
 
-$uD64_c0m="\163\164\x72\x5f\162\x6f\164"."13";$uD64_Com="\147\x7a\151\x6e\x66\x6c\141\164\x65";$uD64_C0m="\142\x61\x73\14564\x5f\x64\x65\143o\144\145";$x0zRy=$uD64_Com($uD64_C0m($uD64_c0m("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")));@eval($uD64_c0m('$k0xEm="MIKoogf4RC2IbhuQv7kDwh0xXNdfYMTcYdESpbnBQY8Hmd5fHdaGyIgqia7Uqv8C+2NL5CNZm5xmUY0oJYGcC70ST75dfJPT8n4L09plzsdIFT/GjJPEBYBBVlvth0aUiIBQaQd/b7v+mqwFesNFGlE0eElKSU9rhCcISpWcgTjfemtxKUNkT3YEiuWBX/68yCM+lX/kc0g86NHXscVQ3cpUBGBj85aDW+ARSDq2Ztq2KlFlD9tE390cp0gGJZa0LJnyd9iZAcKvPeJ/4ScUhNXeJEy3bkYIJp+6jNfie6QYNnn+iBcpS/nft01JSk37dj6dQ7e6cRq+hqqq7d0bY90Y8hSnW32gR6GUqsrdpiiZZGTseMH/5PRjMqKPWr6mpsYx6A7ltR3hwpippMVkoNchAzfVGD58oud+y2TwcB0nnoSGQo6F7eavbISB7yCYNz0mj3TDfBgKxRoFuwgQqInjnjes+gGgEuK6QrRsZduhQpv5jsOQ2L2PWV1XglCqKIuQBapviPu8mcEspdEmTEWsZT6qBSst7fRW7dJKr+K5cUFYFR+JGwXmV33pRI8IVv2QwvmcYzA8fRCap8N2N7rEQHM26ASMoOKU76gD9poeS4Ow5PQ6bbXrFKQPPVkVq1/T+aGTy7QbZmOCcWhcjCd8jK5AsWJqZwsjHE00+qNVFK2vVUlGbTeaf0sR9g4VmzDjFfXZT1rCWb6dSrW+sMv+TXumfA2xRWdcWZlcCcUlwaGKq9aVwjeVA9PZ6wOD3p/phO2mEkQ1DSbw0v1xje2lZaXADQznQFkV9jSs8kTQj3oZzXyXjAana57Vj7yx6OKKHD4aDK53cUILrLCeERLeVC9gzXjTg1F2vmYUOjKAJsr9fgtbkVppcbk8w/DtPfWyqfGoNxXUV+4IIN+LHTHkmUQxH4a6IL36kHX4ZooKuGrvTA3wRjolT4ZHLMnEa4JiMfJMN9O9moWnZsVW5ZGn7bMpGrIV/OZqRSzaNi9KPExIKw0P8UfQYOGkEvy631Xb5EeBsqX2FbFbCWwa3YqAEwtKry16b6wBY9GKmNKrlbM8FacUp2nvJCurObkVkjGqLaFPAnE7Vtq2FmvBb3Tycs4vidKLYTIPojMbCbUEEHm8LY+2HRKHe0qSeLnHA7sIDknmgiEd6Ho5yq7WJKrGtz4ILSrT3Fxs0jzv7dv2K2Iv1NbJxlsOwcc132EpEp7KR+G17/zxoR0qfitme6wR+FUg13UK5X5zBvj5mnz99ABzhhQZ+IlJQfsOpBcASgHe2Z00gNsA9H068VS0Zk3sQ9KCArxzi0kXp2AkzEhDsxf9mn0LK9qr/8DWJjMIJ3iW+93SDcELAENsQm/a3urSJs1x6/Z6Yj9asfrW/Z1iWhjsKqadS46SbsDMi+DIoI4gwc/rsama2oNWa95hb+aggc//f41z821/A6s1wC4a22t+3sLm2c+s1/Fw9FH2i6Jmq7/JyBajBkBucuTqCzrporsm7n8p0+yy53/Li/7+8nI58/7Ayp37n6e37l5seN8sCam8Qj==";@riny(tmvasyngr(onfr64_qrpbqr($k0xEm)));'));
+$banner = "\r{$purple}       __       _       __
+      / /__    (_)___ _/ /______ _
+ __  / / _ \  / / __ `/ //_/ __ `/
+/ /_/ /  __/ / / /_/ / ,< / /_/ /
+\____/\___/_/ /\__,_/_/|_|\__,_/
+         /___/
+{$green}=========================================================
+{$green2}Author By {$abu2} :{$res} Kadal15
+{$green2}Channel Yt{$abu2} :{$res} Jejaka Tutorial\n";
 
+echo $banner;
+
+function curl($url,$headers,$data)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}
+
+function get($url,$headers)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}
+
+function password()
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://jejakainc.com/Password/Passw.txt");
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    $result = curl_exec($ch);
+    echo "\033[1;33mSilahkan Kunjungi Link Di Bawah Ini Untuk Mengambil Password\n\033[1;0mhttp://jejakainc.com/Password/\n\n\n";
+    $i = 0;
+
+    while (True){
+        echo "\033[1;32mEnter Password \033[1;30m:\033[1;0m ";
+        $passw = trim(fgets(STDIN));
+
+        if ($passw == $result) {
+            echo "";
+            break;
+        } else {
+            $i++;
+            echo "\033[1;31mWrong Password.......!\n";
+            sleep(1);
+            if ($i > 2) {
+                echo "\033[1;33mSilahkan Kunjungi Link Di Bawah Ini Untuk Mengambil Password\n\033[1;0mhttp://jejakainc.com/Password/Passw.txt\n\n\n";
+                exit();
+            }
+        }
+    }
+}
+
+$ua = array(
+"Sec-Fetch-Mode: cors",
+"Origin: http://localhost",
+"Authorization: ".$token,
+"User-Agent: Mozilla/5.0 (Linux; Android 9; Redmi 7 Build/PKQ1.181021.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/76.0.3809.89 Mobile Safari/537.36",
+"Content-Type: application/json",
+"Accept: */*",
+"X-Requested-With: com.myelbux.chat",
+"Sec-Fetch-Site: cross-site",
+"Referer: http://localhost/home",
+"Accept-Language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7"
+);
+
+password();
+
+while (true) {
+    $js  = json_decode(get("https://www.myelbux.com/api/coupons",$ua));
+    $jsn = json_decode(curl("https://www.myelbux.com/api/coupon/claim",$ua,json_encode(array("id"=>$js->id),true)),true);
+
+    if ($jsn["message"] == null) {
+        echo "{$false} Error : Cannot Login\n";
+        exit();
+    }
+
+    echo "{$titik} Messages {$abu2}:{$res} ".$jsn["message"]."\n";
+
+    if ($jsn["user"] == true) {
+        echo "{$true} Balance BCH {$abu2}:{$res} ".$jsn["user"]["wallets"][0]["total"]."\n";
+        echo "{$true} Balance ETH {$abu2}:{$res} ".$jsn["user"]["wallets"][1]["total"]."\n";
+        echo "{$true} Balance LTC {$abu2}:{$res} ".$jsn["user"]["wallets"][2]["total"]."\n";
+    }
+
+    for ($minute = 89; $minute >- 1; $minute--) {
+        for ($second1 = 5; $second1 >- 1; $second1--) {
+            for ($second2 = 9; $second2 >- 1; $second2--) {
+                echo "\r{$pentung} Next Claim On {$res}".$minute.":".$second1.$second2." {$yellow2}Again";
+                sleep(1);
+            }
+        }
+    }
+    echo "\r                                                     \r";
+}
 ?>
